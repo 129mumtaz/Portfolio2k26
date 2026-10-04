@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mumta'z Portfolio</title>
+  <meta name="description" content="Tsabit Abdurrazzaq Mumtaz is a software developer based in Indonesia, building thoughtful digital experiences with clean code and considered design.">
+  <meta property="og:title" content="Portfolio Of Mumtaz">
+  <meta property="og:description" content="Software developer based in Indonesia, building thoughtful digital experiences.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#FAFAF9">
+
+  <!-- Icon -->
+  <link
+  rel="icon"
+  type="image/svg+xml"
+  href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F7F7F5'/%3E%3Cpath d='M25 27h50v13H57v34H43V40H25z' fill='%23717B55'/%3E%3C/svg%3E"
+  />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surface: '#FAFAF9',
+            ink: '#18181B',
+            'ink-light': '#3F3F46',
+            muted: '#71717A',
+            faint: '#A1A1AA',
+            line: '#E4E4E7',
+            'line-dark': '#D4D4D8',
+            olive: '#6B7250',
+            'olive-hover': '#5A6143',
+          },
+          fontFamily: {
+            sans: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection {
+      background-color: #6B7250;
+      color: #FAFAF9;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.07s; }
+    .reveal-delay-2 { transition-delay: 0.14s; }
+    .reveal-delay-3 { transition-delay: 0.21s; }
+    .reveal-delay-4 { transition-delay: 0.28s; }
+    .reveal-delay-5 { transition-delay: 0.35s; }
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: #6B7250;
+      transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+    .project-card {
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+    }
+    .project-image-wrap {
+      overflow: hidden;
+    }
+    .project-image-wrap img,
+    .project-image-wrap .placeholder-img {
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .project-card:hover .project-image-wrap img,
+    .project-card:hover .project-image-wrap .placeholder-img {
+      transform: scale(1.04);
+    }
+    .placeholder-img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: #F0EFE9;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 1.25rem;
+    }
+    .placeholder-img::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid #E4E4E7;
+    }
+    .placeholder-img::after {
+      content: '';
+      position: absolute;
+      top: 1.25rem;
+      left: 1.25rem;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      background-image: linear-gradient(to right, #E4E4E7 1px, transparent 1px), linear-gradient(to bottom, #E4E4E7 1px, transparent 1px);
+      background-size: 20% 25%;
+      opacity: 0.5;
+    }
+    .placeholder-img .ph-name {
+      font-weight: 600;
+      font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #A1A1AA;
+      position: relative;
+      z-index: 1;
+    }
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+    .timeline-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #6B7250;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    :focus-visible {
+      outline: 2px solid #6B7250;
+      outline-offset: 3px;
+    }
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAFAF9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D4D4D8;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #A1A1AA;
+    }
+    
+    /* Efek Zoom Halus untuk Semua Tombol saat Di-hover */
+    button, 
+    a.inline-flex, 
+    a[class*="rounded"] {
+      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, border-color 0.3s ease;
+    }
+    button:hover, 
+    a.inline-flex:hover, 
+    a[class*="rounded"]:hover {
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+
+<body class="bg-surface text-ink font-sans antialiased overflow-x-hidden">
+
+  <!-- ====== NAVIGATION ====== -->
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md border-b border-line transition-transform duration-300">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between px-6 lg:px-8 h-14" aria-label="Primary navigation">
+      <a href="#" class="text-sm font-bold tracking-tight" aria-label="Tsabit Mumtaz — Home">
+        tsabit mumtaz
+      </a>
+
+      <!-- Desktop nav -->
+      <ul class="hidden md:flex items-center gap-7 text-[0.8125rem] text-muted font-medium">
+        <li><a href="#projects" class="nav-link hover:text-olive transition-colors" data-nav="projects">Projects</a></li>
+        <li><a href="#about" class="nav-link hover:text-olive transition-colors" data-nav="about">About</a></li>
+        <li><a href="#experience" class="nav-link hover:text-olive transition-colors" data-nav="experience">Experience</a></li>
+        <li><a href="#certificates" class="nav-link hover:text-olive transition-colors" data-nav="certificates">Certificates</a></li>
+        <li><a href="#contact" class="nav-link hover:text-olive transition-colors" data-nav="contact">Contact</a></li>
+      </ul>
+
+      <!-- Mobile menu button -->
+      <button id="menu-toggle" class="md:hidden relative w-8 h-8 flex items-center justify-center" aria-label="Open menu" aria-expanded="false">
+        <span class="block w-[18px] h-[1.5px] bg-ink transition-all duration-300 absolute" id="bar-1" style="transform: translateY(-4px);"></span>
+        <span class="block w-[18px] h-[1.5px] bg-ink transition-all duration-300 absolute" id="bar-2" style="transform: translateY(4px);"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 z-40 w-full bg-surface flex flex-col justify-center px-8 md:hidden" role="dialog" aria-label="Navigation" aria-hidden="true">
+    <nav>
+      <ul class="flex flex-col gap-6">
+        <li><a href="#projects" class="mobile-nav-link text-2xl font-bold text-ink hover:text-olive transition-colors" data-nav="projects">Projects</a></li>
+        <li><a href="#about" class="mobile-nav-link text-2xl font-bold text-ink hover:text-olive transition-colors" data-nav="about">About</a></li>
+        <li><a href="#experience" class="mobile-nav-link text-2xl font-bold text-ink hover:text-olive transition-colors" data-nav="experience">Experience</a></li>
+        <li><a href="#certificates" class="mobile-nav-link text-2xl font-bold text-ink hover:text-olive transition-colors" data-nav="certificates">Certificates</a></li>
+        <li><a href="#contact" class="mobile-nav-link text-2xl font-bold text-ink hover:text-olive transition-colors" data-nav="contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="absolute bottom-8 left-8 right-8 border-t border-line pt-5">
+      <div class="flex gap-5 text-xs text-muted font-medium">
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="hover:text-olive transition-colors">GitHub</a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="hover:text-olive transition-colors">LinkedIn</a>
+        <a href="mailto:tsabit@example.com" class="hover:text-olive transition-colors">Email</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto px-6 lg:px-8">
+
+    <!-- ====== HERO ====== -->
+    <section id="hero" class="pt-32 md:pt-40 pb-20 md:pb-28 border-b border-line">
+      <div class="reveal">
+        <p class="text-xs font-semibold tracking-widest uppercase text-olive mb-6">Software Developer — Indonesia</p>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <h1 class="text-[clamp(2.25rem,5.5vw,4.25rem)] font-extrabold leading-[1.08] tracking-tight max-w-3xl">
+          i build <span class="text-olive">thoughtful</span><br>digital experiences.
+        </h1>
+      </div>
+      <div class="reveal reveal-delay-2 mt-6 max-w-xl">
+        <p class="text-base md:text-lg leading-relaxed text-ink-light">
+          Bonjour, I'm Mumtaz  —  <br>a student and developer from Indonesia. I'm all about clean code, clean interfaces, and building digital tools that actually make sense.
+        </p>
+      </div>
+      <div class="reveal reveal-delay-3 mt-8 flex flex-wrap gap-3">
+        <a href="#projects" class="inline-flex items-center px-5 py-2.5 bg-olive text-surface text-sm font-semibold rounded hover:bg-olive-hover transition-colors">
+          See Work
+          <svg class="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+        <a href="#contact" class="inline-flex items-center px-5 py-2.5 border border-line text-sm font-semibold rounded hover:border-ink-light transition-colors">
+          Get in Touch
+        </a>
+      </div>
+    </section>
+
+    <!-- ====== PROJECTS ====== -->
+    <section id="projects" class="py-20 md:py-28 border-b border-line">
+      <div class="reveal flex items-baseline justify-between mb-12 md:mb-16">
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Selected Projects</h2>
+        <span class="hidden sm:inline text-xs font-semibold text-muted tracking-widest uppercase">03</span>
+      </div>
+
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <!-- Project 1 — Equify -->
+        <article class="project-card reveal reveal-delay-1 group">
+          <a href="https://equifyrandomize.netlify.app/" class="block" aria-label="View Equify project">
+            <div class="project-image-wrap aspect-[16/10] rounded-sm overflow-hidden mb-4">
+             <img src="assets/images/equify.png" alt="Equify Project Screenshot" class="w-full h-full object-cover">
+            </div>
+          </a>
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="text-base font-bold mb-1">Equify</h3>
+              <p class="text-sm text-muted leading-relaxed max-w-xs">A web application for balancing team assignments, making group distribution fair and efficient.</p>
+            </div>
+            <a href="https://equifyrandomize.netlify.app/" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 mt-1 text-faint hover:text-olive transition-colors">
+              <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-3">
+            <span class="px-2 py-0.5 text-[0.6875rem] font-medium text-muted bg-surface border border-line rounded">HTML</span>
+            <span class="px-2 py-0.5 text-[0.6875rem] font-medium text-muted bg-surface border border-line rounded">CSS</span>
+            <span class="px-2 py-0.5 text-[0.6875rem] font-medium text-muted bg-surface border border-line rounded">JavaScript</span>
+          </div>
+        </article>
+
+        <!-- Project 2 — ZZAQNEAKERS -->
+        <article class="project-card reveal reveal-delay-2 group">
+          <a href="https://zzaqneakers.netlify.app" class="block" aria-label="View ZZAQNEAKERS project">
+            <div class="project-image-wrap aspect-[16/10] rounded-sm overflow-hidden mb-4">
+             <img src="assets/images/sneakers.png" alt="Project Screenshot" class="w-full h-full object-cover">
+            </div>
+          </a>
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="text-base font-bold mb-1">ZZAQNEAKERS</h3>
+              <p class="text-sm text-muted leading-relaxed max-w-xs">A sneaker e-commerce platform with product browsing, cart functionality, and a clean storefront experience.</p>
+            </div>
+            <a href="https://zzaqneakers.netlify.app" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 mt-1 text-faint hover:text-olive transition-colors">
+              <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-3">
+            <span class="px-2 py-0.5 text-[0.6875rem] font-medium text-muted bg-surface border border-line rounded">HTML</span>
+            <span class="px-2 py-0.5 text-[0.6875rem] font-medium text-muted bg-surface border border-line rounded">CSS</span>
+            <span class="px-2 py-0.5 text-[0.6875rem] font-medium text-muted bg-surface border border-line rounded">JavaScript</span>
+          </div>
+        </article>
+
+        <!-- Project 3 — Scuba Library -->
+        <article class="project-card reveal md:col-span-2 group">
+          <a href="https://pastebin.com/8vUDuEkU" class="block" aria-label="View Scuba Library project">
+            <div class="project-image-wrap aspect-[16/7] rounded-sm overflow-hidden mb-4">
+              <img src="assets/images/scuba.png" alt="Project Screenshot" class="w-full h-full object-cover">
+            </div>
+          </a>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="text-base font-bold mb-1">Scuba Library</h3>
+                <p class="text-sm text-muted leading-relaxed max-w-sm">A library system designed for seamless book cataloging, checkout processes, and due date management</p>
+              </div>
+              <a href="https://pastebin.com/8vUDuEkU" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 mt-1 text-faint hover:text-olive transition-colors">
+                <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+            <div class="flex flex-wrap gap-1.5 md:justify-end md:items-start">
+              <span class="px-2 py-0.5 text-[0.6875rem] font-medium text-muted bg-surface border border-line rounded">Laravel</span>
+              <span class="px-2 py-0.5 text-[0.6875rem] font-medium text-muted bg-surface border border-line rounded">PHP</span>
+              <span class="px-2 py-0.5 text-[0.6875rem] font-medium text-muted bg-surface border border-line rounded">MySQL</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Tombol Link Langsung ke GitHub -->
+      <div class="mt-12 text-center reveal">
+        <a href="https://github.com/129mumtaz" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-5 py-2.5 border border-line text-sm font-semibold rounded hover:border-ink-light transition-colors">
+          View All on GitHub
+          <svg class="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ====== ABOUT ====== -->
+    <section id="about" class="py-20 md:py-28 border-b border-line">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-10">
+        <div class="md:col-span-5 reveal">
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-6">About</h2>
+          <p class="text-sm md:text-base leading-relaxed text-ink-light">
+           Studying and building software in Indonesia. I care about clean code, clear interfaces, and building things that actually work.
+
+Off the keyboard, I'm big into sports, especially basketball. It's taught me a lot about rhythm, teamwork, and showing up consistently
+          </p>
+        </div>
+        <div class="md:col-span-6 md:col-start-7 reveal reveal-delay-1">
+          <div class="grid grid-cols-3 gap-8">
+            <div>
+              <h3 class="text-[0.6875rem] font-semibold tracking-widest uppercase text-olive mb-4">Frontend</h3>
+              <ul class="text-sm text-ink-light leading-loose">
+                <li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li><li>Tailwind CSS</li><li>Bootstrap</li><li>Flutter</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-[0.6875rem] font-semibold tracking-widest uppercase text-olive mb-4">Backend</h3>
+              <ul class="text-sm text-ink-light leading-loose">
+                <li>Laravel</li><li>PHP</li><li>MySQL</li><li>Dart</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-[0.6875rem] font-semibold tracking-widest uppercase text-olive mb-4">Tools</h3>
+              <ul class="text-sm text-ink-light leading-loose">
+                <li>Git / GitHub</li><li>VS Code</li><li>Figma</li><li>Android Studio</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== EXPERIENCE ====== -->
+    <section id="experience" class="py-20 md:py-28 border-b border-line">
+      <div class="reveal mb-12 md:mb-16">
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Experience</h2>
+      </div>
+      <div class="space-y-0">
+        <!-- Timeline 1: Cikal Harapan (2025) -->
+        <div class="reveal flex gap-5 md:gap-8 pb-10 border-l-2 border-line ml-1 pl-6 md:pl-8 relative">
+          <div class="timeline-dot absolute -left-[5px] top-0"></div>
+          <div class="flex-1">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+              <h3 class="text-sm font-bold">Programming Instructor — SMP Cikal Harapan</h3>
+              <span class="text-xs font-medium text-muted">2025</span>
+            </div>
+            <p class="text-sm text-muted leading-relaxed max-w-lg">
+              Taught fundamental HTML and CSS web development concepts to 8th-grade students, helping them build structured and interactive web pages from scratch.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline 2: SMKN 3 Depok (2025) -->
+        <div class="reveal reveal-delay-1 flex gap-5 md:gap-8 pb-10 border-l-2 border-line ml-1 pl-6 md:pl-8 relative">
+          <div class="timeline-dot absolute -left-[5px] top-0"></div>
+          <div class="flex-1">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+              <h3 class="text-sm font-bold">Programming Instructor — SMKN 3 Depok</h3>
+              <span class="text-xs font-medium text-muted">2025</span>
+            </div>
+            <p class="text-sm text-muted leading-relaxed max-w-lg">
+              Taught web development fundamentals (HTML, CSS, and JavaScript) to 10th-grade students, guiding them through hands-on coding and functional user interface design.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline 3: SMAN 3 Yogyakarta / Padmanaba (2026) -->
+        <div class="reveal reveal-delay-2 flex gap-5 md:gap-8 pb-10 border-l-2 border-line ml-1 pl-6 md:pl-8 relative">
+          <div class="timeline-dot absolute -left-[5px] top-0"></div>
+          <div class="flex-1">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+              <h3 class="text-sm font-bold">Guest Instructor — SMAN 3 Yogyakarta (Padmanaba)</h3>
+              <span class="text-xs font-medium text-muted">2026</span>
+            </div>
+            <p class="text-sm text-muted leading-relaxed max-w-lg">
+              Introduced advanced Tailwind CSS utility-first styling concepts to 12th-grade students, optimizing their workflow for modern web design architecture.
+            </p>
+          </div>
+        </div>
+
+        <div class="relative ml-1"><div class="timeline-dot absolute -left-[5px] top-0"></div></div>
+      </div>
+
+      <!-- Tombol Scroll Down ke Kontak/CV -->
+      <div class="mt-10 reveal">
+        <a href="#contact" class="inline-flex items-center px-5 py-2.5 border border-line text-sm font-semibold rounded hover:border-ink-light transition-colors">
+          Want to see more of my experience? Check my CV
+          <svg class="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ====== CERTIFICATES ====== -->
+    <section id="certificates" class="py-20 md:py-28 border-b border-line">
+      <div class="reveal mb-12 md:mb-16">
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Certificates & Licenses</h2>
+      </div>
+      <div class="space-y-4">
+        <!-- Certificate 1 -->
+        <div class="reveal flex flex-col sm:flex-row sm:items-center sm:justify-between p-5 border border-line rounded-sm hover:border-line-dark transition-colors bg-surface">
+          <div class="mb-2 sm:mb-0">
+            <h3 class="text-sm font-bold mb-1">Basic Git With GitHub</h3>
+            <p class="text-xs text-muted">Dicoding Indonesia</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-xs font-medium text-muted">2025</span>
+            <a href="https://drive.google.com/file/d/1tuIhLcNI463R936RN-70R4eVFeCvqd3E/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-olive hover:underline inline-flex items-center gap-1">
+              View Credential 
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+            </a>
+          </div>
+        </div>
+        <!-- Certificate 2 -->
+        <div class="reveal reveal-delay-1 flex flex-col sm:flex-row sm:items-center sm:justify-between p-5 border border-line rounded-sm hover:border-line-dark transition-colors bg-surface">
+          <div class="mb-2 sm:mb-0">
+            <h3 class="text-sm font-bold mb-1">Front-End Web Development</h3>
+            <p class="text-xs text-muted">Dicoding Indonesia</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-xs font-medium text-muted">2025</span>
+            <a href="https://drive.google.com/file/d/1rccsI5-72WXgu0asu8zRNdg8bV6ZMp5L/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-olive hover:underline inline-flex items-center gap-1">
+              View Credential 
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+            </a>
+          </div>
+        </div>
+        <!-- Certificate 3 -->
+        <div class="reveal reveal-delay-2 flex flex-col sm:flex-row sm:items-center sm:justify-between p-5 border border-line rounded-sm hover:border-line-dark transition-colors bg-surface">
+          <div class="mb-2 sm:mb-0">
+            <h3 class="text-sm font-bold mb-1">Basic Web Programming </h3>
+            <p class="text-xs text-muted">Dicoding Indonesia</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-xs font-medium text-muted">2025</span>
+            <a href="https://drive.google.com/file/d/1oMSehZQ3LOmSsEGxTXf8fXgXF3QyPY-Q/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-olive hover:underline inline-flex items-center gap-1">
+              View Credential 
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tombol See All Certificates -->
+      <div class="mt-10 text-center reveal">
+        <a href="https://drive.google.com/drive/folders/10siZg7K3qSdRPyJrjsJknrbJiZzY_ija?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-5 py-2.5 border border-line text-sm font-semibold rounded hover:border-ink-light transition-colors">
+          See All Certificates
+          <svg class="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ====== CONTACT / DOWNLOAD CV SECTION ====== -->
+    <section id="contact" class="py-20 md:py-28">
+      <div class="reveal max-w-lg">
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">Let's work together</h2>
+        <p class="text-sm md:text-base leading-relaxed text-ink-light mb-8">
+          Currently open to opportunities, teaching, and interesting collaborations. Have a project in mind or want to review my complete CV/experience? Reach out.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a id="contact-email" href="mailto:tsabitmumtazidn@gmail.com?subject=Hello%20from%20Portfolio" class="inline-flex items-center px-5 py-2.5 bg-olive text-surface text-sm font-semibold rounded hover:bg-olive-hover transition-colors">
+          Send an Email
+         <svg class="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+          </a>
+          <!-- Tombol Download CV di sebelah Send an Email -->
+          <a href="https://drive.google.com/drive/folders/19BcFF9DzitxW_bNQAGVzAbGcECZsWUDV?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-5 py-2.5 border border-line text-sm font-semibold rounded hover:border-ink-light transition-colors">
+            Download Complete CV
+            <svg class="ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1 mt-12 pt-8 border-t border-line">
+        <div class="flex flex-wrap gap-6">
+          <!-- Tombol WhatsApp -->
+          <a id="contact-whatsapp" href="https://wa.me/628112502000?text=Halo%20Tsabit,%20saya%20tertarik%20dengan%20portofolio%20Anda." target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors font-medium">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            WhatsApp
+          </a>
+          <a id="contact-github" href="https://github.com/129mumtaz" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors font-medium">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a id="contact-linkedin" href="https://www.linkedin.com/in/tsabitmumtaaaz/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors font-medium">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a id="contact-instagram" href="https://www.instagram.com/tsabitmumtaz" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors font-medium">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="border-t border-line">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8 py-8">
+      <span class="text-xs text-muted">© 2026 Tsabit Abdurrazzaq Mumtaz</span>
+    </div>
+  </footer>
+
+  <!-- ====== JAVASCRIPT ====== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Scroll Reveal
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      revealElements.forEach((el) => revealObserver.observe(el));
+
+      // Header hide/show on scroll
+      const header = document.getElementById('site-header');
+      let lastScrollY = 0;
+      let ticking = false;
+
+      function updateHeader() {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > 100) {
+          if (currentScrollY > lastScrollY) {
+            header.style.transform = 'translateY(-100%)';
+          } else {
+            header.style.transform = 'translateY(0)';
+          }
+        } else {
+          header.style.transform = 'translateY(0)';
+        }
+        lastScrollY = currentScrollY;
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(updateHeader);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      // Active nav indicator
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link[data-nav]');
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navLinks.forEach((link) => {
+              link.classList.toggle('active', link.dataset.nav === id);
+            });
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '-80px 0px -40% 0px' });
+      sections.forEach((section) => sectionObserver.observe(section));
+
+      // Mobile menu
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+      const bar1 = document.getElementById('bar-1');
+      const bar2 = document.getElementById('bar-2');
+      let menuOpen = false;
+
+      function toggleMenu() {
+        menuOpen = !menuOpen;
+        if (menuOpen) {
+          mobileMenu.classList.add('open');
+          mobileMenu.setAttribute('aria-hidden', 'false');
+          menuToggle.setAttribute('aria-expanded', 'true');
+          menuToggle.setAttribute('aria-label', 'Close menu');
+          document.body.style.overflow = 'hidden';
+          bar1.style.transform = 'translateY(3.25px) rotate(45deg)';
+          bar2.style.transform = 'translateY(-3.25px) rotate(-45deg)';
+        } else {
+          mobileMenu.classList.remove('open');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.setAttribute('aria-label', 'Open menu');
+          document.body.style.overflow = '';
+          bar1.style.transform = '';
+          bar2.style.transform = '';
+        }
+      }
+
+      menuToggle.addEventListener('click', toggleMenu);
+      mobileLinks.forEach((link) => {
+        link.addEventListener('click', () => { if (menuOpen) toggleMenu(); });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menuOpen) {
+          toggleMenu();
+          menuToggle.focus();
+        }
+      });
+
+      // Smooth scroll offset for sticky nav & anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          const target = document.querySelector(targetId);
+          if (!target) return;
+          e.preventDefault();
+          const headerHeight = header.offsetHeight;
+          const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
